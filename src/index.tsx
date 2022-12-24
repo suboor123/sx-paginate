@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styles from './styles.module.css'
+import './styles.css';
 
 interface Props {
   postsPerPage: number
@@ -16,7 +16,7 @@ export const SxPaginate = ({ postsPerPage, totalPosts, paginate }: Props) => {
 
   return (
     <nav>
-      <ul className={styles.pagination}>
+      <ul className={'pagination'}>
         {pageNumbers.map((number) => (
           <a onClick={() => paginate(number)} className='page-link'>
             {number}

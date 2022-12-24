@@ -28,3 +28,4 @@ class Example extends Component {
 ## License
 
 MIT © [suboor123](https://github.com/suboor123)
+# sx-paginate

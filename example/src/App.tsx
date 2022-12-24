@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { ExampleComponent } from 'sx-paginate'
+import { SxPaginate } from 'sx-paginate'
 import 'sx-paginate/dist/index.css'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return <SxPaginate postsPerPage={10} totalPosts={100} paginate={(page: number) => {}} />
 }
 
 export default App

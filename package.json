@@ -11,6 +11,14 @@
   "engines": {
     "node": ">=10"
   },
+  "keywords": [
+    "react",
+    "rails",
+    "mvc",
+    "react-component",
+    "pagination"
+  ],
+  "homepage": "https://github.com/suboor123/sx-paginate",
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",

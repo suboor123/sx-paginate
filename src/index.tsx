@@ -18,7 +18,7 @@ export const SxPaginate = ({ postsPerPage, totalPosts, paginate }: Props) => {
     <nav>
     <ul className={styles.pagination}>
       {pageNumbers.map(number => (
-          <a onClick={() => paginate(number)} className='page-link'>
+          <a onClick={() => paginate(number)} className={styles.pageBtn}>
             {number}
           </a>
       

@@ -8,14 +8,16 @@ interface Props {
   records: any[]
   setRecords: (records: any[]) => any
   buttonStyle?: React.CSSProperties
+  activeBtnStyle?: React.CSSProperties
 }
 
 export const SxPaginate = ({
   recordsPerPage = 10,
-  records,
+  records = [],
   setRecords,
   buttonStyle = {},
-  onPaginate
+  onPaginate,
+  activeBtnStyle
 }: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const indexOfLastRecord = currentPage * recordsPerPage
@@ -24,13 +26,11 @@ export const SxPaginate = ({
 
   React.useEffect(() => {
     setRecords(currentRecords)
-  }, [currentPage])
+  }, [currentPage, records.length])
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber)
-    if (onPaginate) {
-      onPaginate(pageNumber)
-    }
+    if (onPaginate) onPaginate(pageNumber)
   }
   const pageNumbers = []
 
@@ -44,7 +44,11 @@ export const SxPaginate = ({
         {pageNumbers.map((number) => (
           <a
             key={number}
-            style={buttonStyle}
+            style={
+              currentPage === number
+                ? activeBtnStyle || buttonStyle
+                : buttonStyle
+            }
             onClick={() => paginate(number)}
             className={
               currentPage === number ? styles.pageBtnActive : styles.pageBtn

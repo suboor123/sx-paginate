@@ -1,29 +1,59 @@
 import * as React from 'react'
+import { useState } from 'react'
 import styles from './styles.module.css'
 
 interface Props {
-  postsPerPage: number;
-  totalPosts: number;
-  paginate: (page: number) => void
+  recordsPerPage: number
+  onPaginate?: (pageNumber: number) => void
+  records: any[]
+  setRecords: (records: any[]) => any
+  buttonStyle?: React.CSSProperties
 }
 
-export const SxPaginate = ({ postsPerPage, totalPosts, paginate }: Props) => {
-  const pageNumbers = [];
+export const SxPaginate = ({
+  recordsPerPage = 10,
+  records,
+  setRecords,
+  buttonStyle = {},
+  onPaginate
+}: Props) => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const indexOfLastRecord = currentPage * recordsPerPage
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
+  const currentRecords = records.slice(indexOfFirstRecord, indexOfLastRecord)
 
-  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
-    pageNumbers.push(i);
+  React.useEffect(() => {
+    setRecords(currentRecords)
+  }, [currentPage])
+
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+    if (onPaginate) {
+      onPaginate(pageNumber)
+    }
+  }
+  const pageNumbers = []
+
+  for (let i = 1; i <= Math.ceil(records.length / recordsPerPage); i++) {
+    pageNumbers.push(i)
   }
 
   return (
     <nav>
-    <ul className={styles.pagination}>
-      {pageNumbers.map(number => (
-          <a onClick={() => paginate(number)} className={styles.pageBtn}>
+      <ul className={styles.pagination}>
+        {pageNumbers.map((number) => (
+          <a
+            key={number}
+            style={buttonStyle}
+            onClick={() => paginate(number)}
+            className={
+              currentPage === number ? styles.pageBtnActive : styles.pageBtn
+            }
+          >
             {number}
           </a>
-      
-      ))}
-    </ul>
-  </nav>
+        ))}
+      </ul>
+    </nav>
   )
 }

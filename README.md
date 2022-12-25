@@ -11,39 +11,50 @@ npm install --save sx-paginate
 ## Usage
 
 ```tsx
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { SxPaginate } from 'sx-paginate'
 import 'sx-paginate/dist/index.css'
 
 const App = () => {
-  let p = []
-  for (let i = 0; i < 100; i++) {
-    p.push(i)
-  }
-
-  const [posts, setPosts] = useState(p)
-  const [paginatedPosts, setPaginatedPosts] = useState([] as any[])
+  const [posts, setPosts] = useState([])
+  const [paginatedPosts, setPaginatedPosts] = useState([])
 
   const onPaginate = (pageNumber: number) => {
     console.log(pageNumber)
   }
-  return (
-<>
-{paginatedPosts.map((p) => (
-  <span key={p}>{p}</span>
-))}
 
-<SxPaginate
-      recordsPerPage={10}
-      onPaginate={onPaginate}
-      records={posts}
-      setRecords={setPaginatedPosts}
-    /></>
+  useEffect(() => {
+    (async () => {
+      const res = await fetch('https://dummyjson.com/posts')
+      const data = await res.json()
+      setPosts(data.posts)
+    })()
+  }, [])
+
+  useEffect(() => {
+    console.log(paginatedPosts)
+  }, [paginatedPosts])
+
+  return (
+    <>
+      {paginatedPosts.map((post: any) => (
+        <div key={post.id}>{post.title}</div>
+      ))}
+
+      <SxPaginate
+        recordsPerPage={10}
+        onPaginate={onPaginate}
+        records={posts}
+        setRecords={setPaginatedPosts as any}
+        activeBtnStyle={{ background: 'coral' }}
+      />
+    </>
   )
 }
 
 export default App
+
 ```
 
 ## License

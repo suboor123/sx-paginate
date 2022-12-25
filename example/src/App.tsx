@@ -12,10 +12,10 @@ const App = () => {
   }
 
   useEffect(() => {
-    ;(async () => {
-      const res = await fetch('https://dummyjson.com/products')
+    (async () => {
+      const res = await fetch('https://dummyjson.com/posts')
       const data = await res.json()
-      setPosts(data.products)
+      setPosts(data.posts)
     })()
   }, [])
 
@@ -25,8 +25,8 @@ const App = () => {
 
   return (
     <>
-      {paginatedPosts.map((p: any) => (
-        <div key={p.id}>{p.title}</div>
+      {paginatedPosts.map((post: any) => (
+        <div key={post.id}>{post.title}</div>
       ))}
 
       <SxPaginate
@@ -34,7 +34,7 @@ const App = () => {
         onPaginate={onPaginate}
         records={posts}
         setRecords={setPaginatedPosts as any}
-        activeBtnStyle={{background: 'red'}}
+        activeBtnStyle={{ background: 'coral' }}
       />
     </>
   )

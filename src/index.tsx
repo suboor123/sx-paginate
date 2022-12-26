@@ -41,6 +41,12 @@ export const SxPaginate = ({
   return (
     <nav>
       <ul className={styles.pagination}>
+        <a
+          style={buttonStyle}
+          className={ styles.pageBtn}
+        >
+          {'Previous'}
+        </a>
         {pageNumbers.map((number) => (
           <a
             key={number}
@@ -57,6 +63,12 @@ export const SxPaginate = ({
             {number}
           </a>
         ))}
+                <a
+          style={buttonStyle}
+          className={ styles.pageBtn}
+        >
+          {'Next'}
+        </a>
       </ul>
     </nav>
   )

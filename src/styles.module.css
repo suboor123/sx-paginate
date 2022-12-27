@@ -1,25 +1,51 @@
 /* add css module styles here (optional) */
+
+:root {
+    --mainColor: #4CAF50;
+}
+
 .pagination {
-  display: inline-block;
+    display: inline-block;
 }
 
 .pageBtn {
-  color: black;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  font-size: 12px;
-  cursor: pointer;
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.pageBtn:hover {
+    background-color: var(--mainColor);
+    transition: background-color .3s;
 }
 
 .pageBtnActive {
-  color: black;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  font-size: 12px;
-  cursor: pointer;
-  background-color: #4CAF50;
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: var(--mainColor);
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: pointer;
+    background-color: rgb(241, 240, 240);
+}
+
+.prev {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.next {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }

@@ -9,6 +9,8 @@ interface Props {
   setRecords: (records: any[]) => any
   buttonStyle?: React.CSSProperties
   activeBtnStyle?: React.CSSProperties
+  paginationType?:string
+  color?:string
 }
 
 export const SxPaginate = ({
@@ -17,19 +19,23 @@ export const SxPaginate = ({
   setRecords,
   buttonStyle = {},
   onPaginate,
-  activeBtnStyle
+  activeBtnStyle,
+  color='blue',
+  paginationType = 'full'
 }: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const indexOfLastRecord = currentPage * recordsPerPage
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
   const currentRecords = records.slice(indexOfFirstRecord, indexOfLastRecord)
-
+  document.documentElement.style.setProperty('--mainColor',color)
   React.useEffect(() => {
     setRecords(currentRecords)
+  
   }, [currentPage, records.length])
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber)
+    console.log(color,paginationType)
     if (onPaginate) onPaginate(pageNumber)
   }
   const pageNumbers = []
@@ -41,6 +47,7 @@ export const SxPaginate = ({
   return (
     <nav>
       <ul className={styles.pagination}>
+        <a style={buttonStyle} onClick={()=> paginate(currentPage-1)} className={`${styles.pageBtn} ${styles.prev} ${currentPage == 1 ? styles.disabled : ""}`}>Previous</a>
         {pageNumbers.map((number) => (
           <a
             key={number}
@@ -57,6 +64,7 @@ export const SxPaginate = ({
             {number}
           </a>
         ))}
+        <a style={buttonStyle} onClick={()=> paginate(currentPage+1)} className={`${styles.pageBtn}  ${styles.next} ${currentPage == pageNumbers.length ? styles.disabled : ""}`}>Next</a>
       </ul>
     </nav>
   )

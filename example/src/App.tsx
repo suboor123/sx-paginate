@@ -36,7 +36,7 @@ const App = () => {
         setRecords={setPaginatedPosts as any}
         activeBtnStyle={{ background: 'green' }}
         color={'red'}
-        paginationType = {'full'}
+        
       />
     </>
   )

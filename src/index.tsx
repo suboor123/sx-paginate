@@ -9,7 +9,7 @@ interface Props {
   setRecords: (records: any[]) => any
   buttonStyle?: React.CSSProperties
   activeBtnStyle?: React.CSSProperties
-  paginationType?:string
+  ellipses?:boolean
   color?:string
 }
 
@@ -21,7 +21,7 @@ export const SxPaginate = ({
   onPaginate,
   activeBtnStyle,
   color='blue',
-  paginationType = 'full'
+  
 }: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const indexOfLastRecord = currentPage * recordsPerPage
@@ -35,7 +35,6 @@ export const SxPaginate = ({
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber)
-    console.log(color,paginationType)
     if (onPaginate) onPaginate(pageNumber)
   }
   const pageNumbers = []

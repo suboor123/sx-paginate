@@ -4,7 +4,7 @@ import { SxPaginate } from 'sx-paginate'
 import 'sx-paginate/dist/index.css'
 
 const App = () => {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState<any[]>([])
   const [paginatedPosts, setPaginatedPosts] = useState([])
 
   const onPaginate = (pageNumber: number) => {
@@ -12,7 +12,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       const res = await fetch('https://dummyjson.com/posts')
       const data = await res.json()
       setPosts(data.posts)
@@ -30,13 +30,13 @@ const App = () => {
       ))}
 
       <SxPaginate
-        recordsPerPage={2}
+        recordsPerPage={10}
         onPaginate={onPaginate}
         records={posts}
-        setRecords={setPaginatedPosts as any}
-        activeBtnStyle={{ background: '' }}
-        color={'green'}
+        setRecords={setPaginatedPosts}
+        activeColor={'#157af6'}
         ellipses={true}
+        activeBtnStyle={{ color: 'white' }}
       />
     </>
   )

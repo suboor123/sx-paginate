@@ -6,11 +6,11 @@ interface Props {
   recordsPerPage: number
   onPaginate?: (pageNumber: number) => void
   records: any[]
-  setRecords: (records: any[]) => any
+  setRecords: any | ((records: any[]) => void)
   buttonStyle?: React.CSSProperties
   activeBtnStyle?: React.CSSProperties
   ellipses?: boolean
-  color?: string
+  activeColor?: string
 }
 
 export const SxPaginate = ({
@@ -20,14 +20,14 @@ export const SxPaginate = ({
   buttonStyle = {},
   onPaginate,
   activeBtnStyle,
-  color = 'blue',
+  activeColor = 'blue',
   ellipses = false
 }: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const indexOfLastRecord = currentPage * recordsPerPage
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
   const currentRecords = records.slice(indexOfFirstRecord, indexOfLastRecord)
-  document.documentElement.style.setProperty('--mainColor', color)
+  document.documentElement.style.setProperty('--mainColor', activeColor)
   React.useEffect(() => {
     setRecords(currentRecords)
   }, [currentPage, records.length])
@@ -79,13 +79,13 @@ export const SxPaginate = ({
 
   return (
     <nav>
-      <ul className={styles.pagination}>
+      <ul className={styles.pagination + ' ' + 'sg-pagination'}>
         <a
           style={buttonStyle}
           onClick={() => paginate(currentPage - 1)}
           className={`${styles.pageBtn} ${styles.prev} ${
             currentPage == 1 ? styles.disabled : ''
-          }`}
+          } sx-pagination-prev-btn`}
         >
           Previous
         </a>
@@ -95,7 +95,7 @@ export const SxPaginate = ({
               <a
                 key={index + '...'}
                 style={buttonStyle}
-                className={`${styles.pageBtn} ${styles.disabled}`}
+                className={`${styles.pageBtn} ${styles.disabled} sx-pagination-btn`}
                 
               >
                 ...
@@ -125,7 +125,7 @@ export const SxPaginate = ({
           onClick={() => paginate(currentPage + 1)}
           className={`${styles.pageBtn}  ${styles.next} ${
             currentPage == pageNumbers.length ? styles.disabled : ''
-          }`}
+          } sx-pagination-next-btn`}
         >
           Next
         </a>

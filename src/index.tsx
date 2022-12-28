@@ -9,8 +9,8 @@ interface Props {
   setRecords: (records: any[]) => any
   buttonStyle?: React.CSSProperties
   activeBtnStyle?: React.CSSProperties
-  ellipses?:boolean
-  color?:string
+  ellipses?: boolean
+  color?: string
 }
 
 export const SxPaginate = ({
@@ -20,50 +20,115 @@ export const SxPaginate = ({
   buttonStyle = {},
   onPaginate,
   activeBtnStyle,
-  color='blue',
-  
+  color = 'blue',
+  ellipses = false
 }: Props) => {
   const [currentPage, setCurrentPage] = useState(1)
   const indexOfLastRecord = currentPage * recordsPerPage
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage
   const currentRecords = records.slice(indexOfFirstRecord, indexOfLastRecord)
-  document.documentElement.style.setProperty('--mainColor',color)
+  document.documentElement.style.setProperty('--mainColor', color)
   React.useEffect(() => {
     setRecords(currentRecords)
-  
   }, [currentPage, records.length])
 
-  const paginate = (pageNumber: number) => {
+  const paginate = (pageNumber: number | string) => {
+    if (typeof pageNumber == 'string') {
+      return
+    }
     setCurrentPage(pageNumber)
+
     if (onPaginate) onPaginate(pageNumber)
   }
-  const pageNumbers = []
 
-  for (let i = 1; i <= Math.ceil(records.length / recordsPerPage); i++) {
-    pageNumbers.push(i)
+  const ellipsesPaginate = (currentPage: number) => {
+    let current = currentPage,
+      last = records.length / recordsPerPage,
+      delta = 2,
+      left = current - delta,
+      right = current + delta + 1,
+      range = [],
+      l
+
+    for (let i = 1; i <= last; i++) {
+      if (i == 1 || i == last || (i >= left && i < right)) {
+        range.push(i)
+      }
+    }
+
+    for (let i of range) {
+      if (l) {
+        if (i - l === 2) {
+          pageNumbers.push(l + 1)
+        } else if (i - l !== 1) {
+          pageNumbers.push('...')
+        }
+      }
+      pageNumbers.push(i)
+      l = i
+    }
+  }
+  const pageNumbers = []
+  if (ellipses) {
+    ellipsesPaginate(currentPage)
+  } else {
+    for (let i = 1; i <= Math.ceil(records.length / recordsPerPage); i++) {
+      pageNumbers.push(i)
+    }
   }
 
   return (
     <nav>
       <ul className={styles.pagination}>
-        <a style={buttonStyle} onClick={()=> paginate(currentPage-1)} className={`${styles.pageBtn} ${styles.prev} ${currentPage == 1 ? styles.disabled : ""}`}>Previous</a>
-        {pageNumbers.map((number) => (
-          <a
-            key={number}
-            style={
-              currentPage === number
-                ? activeBtnStyle || buttonStyle
-                : buttonStyle
-            }
-            onClick={() => paginate(number)}
-            className={
-              currentPage === number ? styles.pageBtnActive : styles.pageBtn
-            }
-          >
-            {number}
-          </a>
-        ))}
-        <a style={buttonStyle} onClick={()=> paginate(currentPage+1)} className={`${styles.pageBtn}  ${styles.next} ${currentPage == pageNumbers.length ? styles.disabled : ""}`}>Next</a>
+        <a
+          style={buttonStyle}
+          onClick={() => paginate(currentPage - 1)}
+          className={`${styles.pageBtn} ${styles.prev} ${
+            currentPage == 1 ? styles.disabled : ''
+          }`}
+        >
+          Previous
+        </a>
+        {pageNumbers.map((number, index) => {
+          if (typeof number == 'string') {
+            return (
+              <a
+                key={index + '...'}
+                style={buttonStyle}
+                className={`${styles.pageBtn} ${styles.disabled}`}
+                
+              >
+                ...
+              </a>
+            )
+          } else {
+            return (
+              <a
+                key={number}
+                style={
+                  currentPage === number
+                    ? activeBtnStyle || buttonStyle
+                    : buttonStyle
+                }
+                onClick={() => paginate(number)}
+                className={
+                  currentPage === number ? styles.pageBtnActive : styles.pageBtn
+                }
+              >
+                {number}
+              </a>
+            )
+          }
+        })}
+        <a
+          style={buttonStyle}
+          onClick={() => paginate(currentPage + 1)}
+          className={`${styles.pageBtn}  ${styles.next} ${
+            currentPage == pageNumbers.length ? styles.disabled : ''
+          }`}
+        >
+          Next
+        </a>
       </ul>
     </nav>
   )

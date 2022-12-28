@@ -16,6 +16,9 @@
     border: 1px solid #ddd;
     font-size: 12px;
     cursor: pointer;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .pageBtn:hover {
@@ -32,11 +35,19 @@
     font-size: 12px;
     cursor: pointer;
     background-color: var(--mainColor);
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .disabled {
+    cursor: not-allowed;
+    pointer-events: auto;
+    background-color: rgb(241, 240, 240);
+}
+
+.disabled:hover {
     pointer-events: none;
-    cursor: pointer;
     background-color: rgb(241, 240, 240);
 }
 

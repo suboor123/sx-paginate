@@ -30,13 +30,13 @@ const App = () => {
       ))}
 
       <SxPaginate
-        recordsPerPage={10}
+        recordsPerPage={2}
         onPaginate={onPaginate}
         records={posts}
         setRecords={setPaginatedPosts as any}
-        activeBtnStyle={{ background: 'green' }}
-        color={'red'}
-        
+        activeBtnStyle={{ background: '' }}
+        color={'green'}
+        ellipses={true}
       />
     </>
   )

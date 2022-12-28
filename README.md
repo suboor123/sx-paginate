@@ -4,7 +4,7 @@
 
 ![Screenshot 2022-12-29 at 5 18 48 AM](https://user-images.githubusercontent.com/39632489/209886070-26795c0b-01df-4fe8-a516-8c6043bfedd4.png)
 
-DEMO - https://react-hctxyq.stackblitz.io
+DEMO - https://stackblitz.com/edit/react-hctxyq?file=src/App.js
 
 
 ## Install

@@ -2,8 +2,10 @@
 
 [![NPM](https://img.shields.io/npm/v/sx-paginate.svg)](https://www.npmjs.com/package/sx-paginate) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+![Screenshot 2022-12-29 at 5 18 48 AM](https://user-images.githubusercontent.com/39632489/209886070-26795c0b-01df-4fe8-a516-8c6043bfedd4.png)
 
-![Screenshot 2022-12-26 at 2 45 42 AM](https://user-images.githubusercontent.com/39632489/209482152-bccf58c5-a5c2-4fca-963c-af7f670c4561.png)
+DEMO - https://react-hctxyq.stackblitz.io
+
 
 ## Install
 

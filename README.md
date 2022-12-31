@@ -66,6 +66,13 @@ export default App
 | ------------------------  | ----------------------------------------------------------------- |
 | recordsPerPage            | Records display on the page eg. 10                                |
 | records                   | Array of recrods                                                  |
+| onPaginate                | functon takes paginated page number as an arguemnent (pageNumber) => {console.log(pageNumber)}|
+| setRecords                | function to get paginated records                                 |
+| buttonStyle ?             | CSS Properties                                                    |
+| activeBtnStyle ?          | CSS Properties                                                    |
+| ellipses?                 | {Boolean}  show ellipses for long pagination                      |
+| activeColor               | {String} color value to chnage the background color of active page|
+
 
 ## License
 MIT © [suboor123](https://github.com/suboor123)

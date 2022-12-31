@@ -59,10 +59,13 @@ const App = () => {
 }
 
 export default App
-
 ```
 
-## License
+# Options
+| **Options**               | **Description**                                                   |
+| ------------------------  | ----------------------------------------------------------------- |
+| recordsPerPage            | Records display on the page eg. 10                                |
+| records                   | Array of recrods                                                  |
 
+## License
 MIT © [suboor123](https://github.com/suboor123)
-# sx-paginate
